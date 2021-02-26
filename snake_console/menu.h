@@ -1,6 +1,12 @@
 #pragma once
+#include <vector>
 
+class snake;
+class food;
 struct position;
+
+enum en { UP, DOWN, RIGHT, LEFT };
+
 
 class menu
 {
@@ -14,6 +20,7 @@ public:
 
 	int get_height();
 	int get_width();
+	int get_color();
 };
 
 void show_menu(menu &m);
@@ -25,6 +32,13 @@ void close_code(menu& m);
 struct position
 {
 	int x, y;
+
+	position() = default;
+	position(int x, int y)
+	{
+		this->x = x;
+		this->y = y;
+	}
 };
 
 class field
@@ -37,6 +51,53 @@ public:
 	field(int height, int width);
 	~field();
 
-	void show_field();
+	void show_field(int color = 15);
 	void clear_field();
+
+	void set_food(food food_);
+	void set_snake(snake snake_);
+
+	int get_height();
+	int get_width();
+};
+
+class food
+{
+	position position_;
+	char symbol;
+
+public:
+	food();
+
+	position get_position();
+	char get_symbol();
+
+	void respamn(field& field);
+};
+
+class snake
+{
+	en direction;
+	char snake_symbol;
+	std::vector<position> body;
+	int speed;
+	bool is_alive;
+
+public:
+	snake() = default;
+	snake(position pos);
+
+	bool is_eating(food& food_);
+	void set_direction(en dir);
+	void move(field& f);
+	void set_position(position pos);
+	void set_is_alive(bool flag);
+
+	int get_size();
+	std::vector<position> get_tail();
+	bool get_is_alive();
+	position& get_position();
+	en get_direction();
+
+	void clear_snake();
 };

@@ -4,6 +4,7 @@
 
 int main()
 {
+	srand(time(nullptr));
 	menu m;
 	
 	show_menu(m);
