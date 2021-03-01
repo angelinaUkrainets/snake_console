@@ -1,11 +1,13 @@
 #pragma once
 #include <vector>
 
+//header file where is all classes, global functions, enums and structures
+
 class snake;
 class food;
 struct position;
 
-enum en { UP, DOWN, RIGHT, LEFT };
+enum en { STOP, UP, DOWN, RIGHT, LEFT };
 
 
 class menu
@@ -86,10 +88,10 @@ class snake
 public:
 	snake() = default;
 	snake(position pos);
+	~snake();
 
 	bool is_eating(food& food_);
 	void set_direction(en dir);
-	void move(field& f);
 	void set_position(position pos);
 	void set_is_alive(bool flag);
 
